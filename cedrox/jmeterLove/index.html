@@ -1,0 +1,58 @@
+<html ng-app="jmeterLove">
+            <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"/>   
+            <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+            <script type="text/javascript" src="js/angular-file-upload.min.js"></script>
+             <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+            <link rel="stylesheed" type="text/css" href="css/style.css"/>
+            <script type="text/javascript" src="js/app.js"></script>
+</html>
+<body>
+<div ng-controller="csvreader-ng as reader">
+           <table>
+                <tr >
+                    <th style="{{getStyleHeader()}}" ng:repeat="element in csvData.headersCsv">
+                         {{element}}
+                    </th>
+                </tr>
+                <tr data-ng-repeat="element1 in csvData.rowsCsv track by $index">
+                    <td  style="{{getStyleCell()}}" ng:repeat="element2 in element1 track by $index">
+                        {{element2}}
+                    <td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="container" ng-controller="AppController" nv-file-drop="" uploader="uploader" filters="queueLimit, customFilter">
+         <div class="row">
+                <div class="col-md-3">
+                    <h3>Select files</h3>
+                    <input type="file" nv-file-select="" uploader="uploader"  />
+                     <table class="table">
+                        <thead>
+                            <tr>
+                                <th ng-show="uploader.isHTML5">Progress</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in uploader.queue">
+                                <td ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+
